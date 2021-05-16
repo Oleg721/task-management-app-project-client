@@ -1,90 +1,115 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import './SignIn.css'
+import React, {useState, useEffect, useRef} from 'react';
+import {BrowserRouter as Router, Switch, Route, Link, useParams} from "react-router-dom";
+import {actionLogin} from '../../actions'
+import store from "../../store/store"
 
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: `#c80000`,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-}));
+
 
 
 export default function SignIn() {
-    const classes = useStyles();
 
-    return ( <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <VpnKeyIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
-                    </Typography>
 
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="login"
-                        label="Login"
-                        name="Login"
-                        autoComplete="login"
-                        autoFocus
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                    />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Sign In
-                    </Button>
-                    <Grid container>
-
-                        <Grid item xs>
-                            <Link href="/registration" variant="body2">
-                                "Don't have an account? Sign Up"
-                            </Link>
-                        </Grid>
-                    </Grid>
-
+    return (
+        <div className="signIn">
+            <div className="login-page">
+                <div className="form">
+                    <Router>
+                        <Switch>
+                            <Route exact path="/login">
+                                <LoginForm action = {(login, password)=>store.dispatch(actionLogin(login,password))}
+                                           passwordValidator={passwordValidator}/>
+                            </Route>
+                            <Route exact path="/registration">
+                                <RegisterForm/>
+                            </Route>
+                        </Switch>
+                    </Router>
                 </div>
-            </Container>)
+            </div>
+
+        </div>
+    )
+
+}
+
+
+
+const RegisterForm = ({action})=>{
+    const [login, setLogin] = useState(``);
+    const [name, setName] = useState(``);
+    const [password, setPassword] = useState(``);
+    const [verifyPassword, setVerifyPassword] = useState(``);
+
+
+
+    return (
+        <div className="register-form">
+            <h3>SignUp</h3>
+            <input type="text"
+                   placeholder="login"
+                   onChange={(event)=>setLogin(event.target.value)} />
+            <input type="text"
+                   placeholder="name"
+                   onChange={(event)=>setName(event.target.value)} />
+            <PasswordInput setText={setPassword} placeholderText="Password"/>
+            <PasswordInput setText={setVerifyPassword} placeholderText="Repeat password"/>
+
+            <button disabled={ !login.length|| (password !== verifyPassword) || !passwordValidator(password)}
+                    onClick={()=>action({login:login, password: password})}>
+                create
+            </button>
+            <p className="message">Already registered?
+                <Link to='/login'>Sign In</Link>
+            </p>
+        </div>
+    )
+}
+
+
+const LoginForm = ({action, passwordValidator})=>{
+    const [login, setLogin] = useState(``);
+    const [password, setPassword] = useState(``);
+
+
+    return (
+        <div className="login-form">
+            <h3>SignIn</h3>
+
+            <input type="text"
+                   placeholder="login"
+                   onChange={(event)=>setLogin(event.target.value)} />
+            <PasswordInput setText={setPassword} placeholderText="Password"/>
+
+            <button disabled={ !login.length || !passwordValidator(password)}
+                onClick={()=>action(login, password)} >login</button>
+
+            <p className="message">Not registered?
+                <Link to="/registration">Create an account</Link>
+            </p>
+        </div>
+    )
+}
+
+
+const PasswordInput = ({setText, placeholderText}) => {
+
+    return <input type="password"
+                  placeholder={placeholderText}
+                  autoComplete="new-password"
+                  onChange={(e) => setText(e.target.value)}
+
+    />
+}
+
+
+const ValidateInfoSpan = ({text, min, val = () => true}) => {
+    return <span style={{color: text.length < min && "red", visibility: text.length >= min && val(text) && `hidden`}}>
+                                 {text.length < min ? "length is short" : !val(text) && "not valid password"}
+        </span>
+}
+
+function passwordValidator(validationText){
+    return !!(validationText.toString().length >= 8)
 }

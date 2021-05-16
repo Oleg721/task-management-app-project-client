@@ -1,36 +1,45 @@
 import './App.css';
-import SignUp from './components/authComponent/SignUp';
-import SignIn from './components/authComponent/SignIn';
-import TableTest from "./components/TableTest";
-import Paperbase from "./pages/Paperbase";
-import React, {useState, useEffect, useRef} from 'react';
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
+import React, {useState, useEffect, useRef} from 'react';
+import {BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
+import SignIn from "./components/authComponent/SignIn";
+import {Provider, connect}   from 'react-redux';
+import store from "./store/store";
+import {actionUsers} from "./actions";
+import Main from "./pages/main"
+
+console.log(store.getState())
+store.subscribe(()=> console.log(store.getState()))
 
 
 
 function App() {
   return (
-    <div className="App">
+      <Provider store={store}>
+        <div className="App">
 
-        <Router>
-            <Switch>
-                <Route path='/registration'>
-                    <SignUp/>
-                </Route>
-                <Route exact path='/tab'>
-                    <TableTest/>
-                </Route>
-                <Route path='/main'>
-                    <Paperbase/>
-                </Route>
-                <Route path='/'>
-                    <SignIn/>
-                </Route>
-            </Switch>
-        </Router>
+            <Router>
+                <Switch>
+                    <Route path='/login'>
+                        <SignIn/>
+                    </Route>
+                    <Route path='/registration'>
+                        <SignIn/>
+                    </Route>
+                    <Route exact path='/tab'>
 
-    </div>
+                    </Route>
+                    <Route path='/main'>
+
+                    </Route>
+                    <Route path='/'>
+                        <Main/>
+                    </Route>
+                </Switch>
+            </Router>
+
+        </div>
+      </Provider>
   );
 }
 
