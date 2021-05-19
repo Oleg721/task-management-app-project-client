@@ -15,7 +15,9 @@ export const authReducer = (state = {}, action) => {
         localStorage.authToken = action.jwt;
         //jwt_decode //взять среднюю часть токена, натравить на неё atob, а потом JSON.parse
 
-        return {authToken: action.jwt, payload: jwt_decode(action.jwt)}
+    return {authToken: action.jwt, payload: jwt_decode(action.jwt)}
+
+
     }
 
     if (action.type === 'LOGOUT'){
@@ -31,7 +33,13 @@ export const authReducer = (state = {}, action) => {
 function jwt_decode(token) {
     if(!token || token === `undefined` || token === `null`) {
         return ``};
+try {
     let i =  atob(token.match(/(?<=[.]).+(?=[.])/));
     console.log(i);
     return JSON.parse(i);
+} catch (e) {
+    console.log(`jwt_decode err` + e.name)
+
+}
+
 }
