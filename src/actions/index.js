@@ -19,7 +19,7 @@ export const actionAuthLogout = () => ({type: `LOGOUT`});
 export const actionLogin = (login, password) => ({type: `LOGIN`, password: password, login:login});
 
 
-
+export const actionUserProjects = ()=>({type: "USER_PROJECTS"})
 
 /*export const actionVerifyToken = (authToken) =>{
 
@@ -27,7 +27,7 @@ export const actionLogin = (login, password) => ({type: `LOGIN`, password: passw
                                     verifyToken(authToken: $authToken)
                                      }`,{authToken})
 
-    //const promise = gql(`query login2{login (nickName: "pumpkin", password: "qwerty12345")}`,{})
+    //const promise = gql(`query login2{login (login: "pumpkin", password: "qwerty12345")}`,{})
 
     return actionPromise('verifyToken', promise)
 }*/

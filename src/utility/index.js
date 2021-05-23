@@ -1,5 +1,5 @@
 import store from "../store";
-import {actionAuthLogin} from "../actions";
+
 
 
 
@@ -25,10 +25,9 @@ export let gql = getGQL('/graphql');
 
 
 /*
+
 export function authByLocalStorage(setUser = ()=>{}) {
     if(store.getState().auth.payload || !window.localStorage.authToken) return;
-    console.log(`INIT!!!!!!!!!!!!`)
-    store.dispatch(actionVerifyToken(window.localStorage.authToken));
 
     const unsubscribeAut =  store.subscribe(() => {
         console.log(`UN_____AUTHORIZ`)
@@ -39,9 +38,9 @@ export function authByLocalStorage(setUser = ()=>{}) {
             return;
         }
 
-        if( !store.getState().promise.verifyToken.payload) return;
         store.dispatch(actionAuthLogin(window.localStorage.authToken));
 
     })
 
-}*/
+}
+*/

@@ -1,5 +1,5 @@
 import './SignIn.css'
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState} from 'react';
 import {BrowserRouter as Router, Switch, Route, Link, useParams} from "react-router-dom";
 import {actionLogin} from '../../actions'
 import store from "../../store"

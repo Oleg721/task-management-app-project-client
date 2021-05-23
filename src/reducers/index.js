@@ -13,7 +13,7 @@ export const authReducer = (state = {}, action) => {
 
     if (action.type === 'AUTH_LOGIN'){
 
-      //  localStorage.authToken = action.jwt;
+      //l  localStorage.authToken = action.jwt;
         //jwt_decode //взять среднюю часть токена, натравить на неё atob, а потом JSON.parse
 
     return {authToken: action.jwt, payload: jwt_decode(action.jwt)}

@@ -1,27 +1,33 @@
 import './App.css';
 
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState,} from 'react';
 import {BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
 import SignIn from "./components/authComponent/SignIn";
 import {Provider, connect}   from 'react-redux';
 import store from "./store";
 import {actionAuthLogin, actionUsers, actionVerifyToken} from "./actions";
 import Main from "./pages/main"
-import {authByLocalStorage} from "./utility";
+
 
 console.log(store.getState())
 store.subscribe(()=> console.log(store.getState()))
 
-//СДЕЛАТЬ САНК ДЛЯ входа в систему по токену
 
+{if(window.localStorage.authToken){store.dispatch(actionAuthLogin(window.localStorage.authToken))}}
 
 
 
 function App() {
 
-    const[{id, nickName}, setUser] = useState(store.getState().auth?.payload || {id: null, nickName: null})
+    const[{id, login}, setUser] = useState(store.getState().auth?.payload || {id: null, login: null})
 
-//authByLocalStorage((val)=>setUser(val))
+
+    const unsubscribeAut = store.subscribe(() =>{
+        if(!store.getState().auth.payload) {
+            setUser({id: null, login: null})
+        } else
+        setUser(store.getState().auth.payload);
+    })
 
 
   return (
@@ -29,7 +35,7 @@ function App() {
         <div className="App">
 
             <Router>
-                {id && nickName && <Redirect to="/"/> }
+                {id && login && <Redirect to="/"/> }
                 <Switch>
                     <Route path='/login'>
 
@@ -45,10 +51,9 @@ function App() {
 
                     </Route>
                     <Route path='/'>
-                        <Main/>
 
-                      {console.log(nickName,id)}
-                        {(id && nickName) ?
+                      {console.log(login,id)}
+                        {(id && login) ?
                             <Main/> :
                         <Redirect to='login'/>}
 
