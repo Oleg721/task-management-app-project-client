@@ -1,5 +1,5 @@
-import store from "../store/store";
-import {actionAuthLogin, actionVerifyToken, actionUsers} from "../actions";
+import store from "../store";
+import {actionAuthLogin} from "../actions";
 
 
 
@@ -24,6 +24,7 @@ export let gql = getGQL('/graphql');
 
 
 
+/*
 export function authByLocalStorage(setUser = ()=>{}) {
     if(store.getState().auth.payload || !window.localStorage.authToken) return;
     console.log(`INIT!!!!!!!!!!!!`)
@@ -43,4 +44,4 @@ export function authByLocalStorage(setUser = ()=>{}) {
 
     })
 
-}
+}*/

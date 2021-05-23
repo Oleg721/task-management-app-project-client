@@ -4,7 +4,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import {BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
 import SignIn from "./components/authComponent/SignIn";
 import {Provider, connect}   from 'react-redux';
-import store from "./store/store";
+import store from "./store";
 import {actionAuthLogin, actionUsers, actionVerifyToken} from "./actions";
 import Main from "./pages/main"
 import {authByLocalStorage} from "./utility";
@@ -21,7 +21,7 @@ function App() {
 
     const[{id, nickName}, setUser] = useState(store.getState().auth?.payload || {id: null, nickName: null})
 
-authByLocalStorage((val)=>setUser(val))
+//authByLocalStorage((val)=>setUser(val))
 
 
   return (
@@ -45,7 +45,9 @@ authByLocalStorage((val)=>setUser(val))
 
                     </Route>
                     <Route path='/'>
-                        {console.log(nickName,id)}
+                        <Main/>
+
+                      {console.log(nickName,id)}
                         {(id && nickName) ?
                             <Main/> :
                         <Redirect to='login'/>}

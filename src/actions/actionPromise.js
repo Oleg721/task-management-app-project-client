@@ -1,9 +1,11 @@
-const actionPending = name => ({type: 'PROMISE', status: 'PENDING', name})
-const actionResolved = (name, payload) => ({type: 'PROMISE', status: 'RESOLVED', payload, name})
-const actionRejected = (name, error) => ({type: 'PROMISE',status: 'REJECTED', error, name})
+export const actionPending = name => ({type: 'PROMISE', status: 'PENDING', name})
+export const actionResolved = (name, payload) => ({type: 'PROMISE', status: 'RESOLVED', payload, name})
+export const actionRejected = (name, error) => ({type: 'PROMISE',status: 'REJECTED', error, name})
 
+export const actionPromise = (name, promise)=>({type: 'PROMISE_ASYNC', name, promise})
 
-export const actionPromise = (name='default', p=delay(2000)) =>
+/*
+ const actionPromise = (name='default', p=delay(2000)) =>
 
     async dispatch => {
         dispatch(actionPending(name))
@@ -19,3 +21,4 @@ export const actionPromise = (name='default', p=delay(2000)) =>
 
 
 const delay = ms => new Promise(ok => setTimeout(() => ok(ms), ms))
+*/

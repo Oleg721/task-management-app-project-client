@@ -2,7 +2,7 @@ import './SignIn.css'
 import React, {useState, useEffect, useRef} from 'react';
 import {BrowserRouter as Router, Switch, Route, Link, useParams} from "react-router-dom";
 import {actionLogin} from '../../actions'
-import store from "../../store/store"
+import store from "../../store"
 
 
 
@@ -57,7 +57,7 @@ const RegisterForm = ({action})=>{
             <PasswordInput setText={setVerifyPassword} placeholderText="Repeat password"/>
 
             <button disabled={ !login.length|| (password !== verifyPassword) || !passwordValidator(password)}
-                    onClick={()=>action({login:login, password: password})}>
+                    onClick={()=>action(login, password)}>
                 create
             </button>
             <p className="message">Already registered?

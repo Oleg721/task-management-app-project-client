@@ -1,5 +1,6 @@
 export function promiseReducer(state={},{type, status, payload, error, name} ){
 
+
     if(type === 'PROMISE') return {...state, [name]: {status, payload, error}}
     if (type === 'LOGOUT') return  {}
     else return state
@@ -10,14 +11,12 @@ export function promiseReducer(state={},{type, status, payload, error, name} ){
 export const authReducer = (state = {}, action) => {
 
 
-    if (action.type === 'LOGIN'){
+    if (action.type === 'AUTH_LOGIN'){
 
-        localStorage.authToken = action.jwt;
+      //  localStorage.authToken = action.jwt;
         //jwt_decode //взять среднюю часть токена, натравить на неё atob, а потом JSON.parse
 
     return {authToken: action.jwt, payload: jwt_decode(action.jwt)}
-
-
     }
 
     if (action.type === 'LOGOUT'){
