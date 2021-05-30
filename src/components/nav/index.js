@@ -27,7 +27,7 @@ const Nav = ()=>{
 
                 <span>PROJECTS</span>
                 <ul>
-                    {projects.map((val) => {
+                    {projects?.map((val) => {
                         return <li key={val.id}><Link to="/project">{val.name}</Link></li>
                     })}
                 </ul>

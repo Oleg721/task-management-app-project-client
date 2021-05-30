@@ -1,0 +1,52 @@
+
+ul{
+    padding: 0;
+    list-style: none;
+}
+
+.table-test{
+    margin: 2rem;
+    width: 50%;
+}
+.table-test > table{
+    margin: 2rem;
+}
+
+
+
+.table-test table, td{
+    border: 1px solid black;
+    border-collapse: collapse
+}
+
+.table-test .inner-table{
+    /*background-color: deepskyblue;*/
+    border-style: hidden;
+}
+
+
+.table-test .taskName{
+    width: 13rem;
+}
+.table-test .taskId{
+    width: 5rem;
+}
+.table-test .taskDate{
+    width: 7rem;
+}
+
+.table-test .taskContainer{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    background-color: #7fd6ff61;
+    margin: 0.2rem 0 0.2rem 0;
+}
+
+
+
+.table-test td{
+
+    padding: 0;
+    margin: 0;
+}

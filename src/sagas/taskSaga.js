@@ -5,12 +5,12 @@ import {gql} from "../utility";
 
 
 export function* watchAsyncAction() {
-    yield takeLatest(`GET_USERS_ASYNC`, getUsersAsync);
-    yield takeLatest(`USER_PROJECTS` , getUserProjects);
+/*    yield takeLatest(`GET_USERS_ASYNC`, getUsersAsync);
+    yield takeLatest(`USER_PROJECTS` , getUserProjects);*/
 }
 
 
-function* getUsersAsync() {
+function* getUserTaskAsync() {
     const promise = gql(`query{
   getUsers
   {
