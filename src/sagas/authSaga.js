@@ -15,7 +15,7 @@ function* loginSaga({login, password}){
     console.log(login, password);
     const authToken = yield  gql(`query login($login:String, $password: String){
                                         login(login:$login , password : $password)
-                                        }`,{login, password})
+                                        }`,{login, password});
     localStorage.authToken = authToken;
     console.log(authToken);
     yield put(actionAuthLogin(authToken));
@@ -23,6 +23,7 @@ function* loginSaga({login, password}){
 
 export function* authLoginSaga({authToken}) {
     yield call(actionAuthLogin, authToken);
+    console.log()
     yield put(actionUserProjects());
 }
 

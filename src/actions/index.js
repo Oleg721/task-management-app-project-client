@@ -19,7 +19,14 @@ export const actionAuthLogout = () => ({type: `LOGOUT`});
 export const actionLogin = (login, password) => ({type: `LOGIN`, password: password, login:login});
 
 
-export const actionUserProjects = ()=>({type: "USER_PROJECTS"})
+export const actionUserProjects = ()=>({type: "GET_USER_PROJECTS"});
+
+export const actionAddTask = (task)=>({type: `ADD_TASK`, task : task });
+
+export const actionAddChildrenTask = (task)=>({type : 'ADD_CHILDREN_TASKS', task : task});
+
+
+
 
 /*export const actionVerifyToken = (authToken) =>{
 

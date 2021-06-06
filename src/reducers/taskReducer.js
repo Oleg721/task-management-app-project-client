@@ -1,12 +1,16 @@
 export default function taskReducer(state={},{type, task} ){
 
+
+
+
     if(!task?.path?.match(/^(\/[0-9]+)+$/)) return state;
     const {path, ...taskProps} = task;
     const idArr = path.substring(1).split(`\/`)
     let   taskNode =  {[idArr[0]] : state[idArr[0]]} || {};
     const rootTask = taskNode;
 
-    if(type === 'ADD_TASK' || type === 'UPDATE_TASK') {
+    if(type === `GET_TASK` || type === 'ADD_TASK' || type === 'UPDATE_TASK') {
+        console.log(`ADD_TASK_REDUCER_IN`);
         for (let id of idArr){
 
             taskNode[id] ?
@@ -18,6 +22,10 @@ export default function taskReducer(state={},{type, task} ){
                 taskNode[id]  = {...taskNode[id] , ...taskProps}
         }
         return { ...state,  ...rootTask }
+    }
+
+    if(type === `GET_TASKS`){
+
     }
 
 

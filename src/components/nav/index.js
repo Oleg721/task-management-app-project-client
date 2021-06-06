@@ -1,34 +1,27 @@
 import './index.css';
-
-import React, {useEffect, useState} from "react";
 import store from "../../store";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {connect}   from 'react-redux';
+import {actionUserProjects} from '../../actions'
+import {getUserProject} from '../../connect'
 
-const Nav = ()=>{
-    const [projects, setProjects] = useState([]);
+const Nav = ({userProjects})=>{
 
-    useEffect(()=> {
-        let cleanupFunction = false;
-        store.subscribe(()=>{
-            if(!store.getState().promise.userProjects) return;
-            if(store.getState().promise.userProjects.status !== `RESOLVED`) return;
-
-            if(!cleanupFunction)setProjects(store.getState().promise.userProjects.payload);
-        })
-            return ()=> cleanupFunction = true;
-    },[])
-
-
+   // useState(() => {store.dispatch(actionUserProjects())}, []);
 
     return(
         <nav className="nav">
             <hr/>
-            <div className="nav-projects">
+            <div className="nav-create-task-btn">
+                <Link to="/create-task">Create project</Link>
+            </div>
 
+            <div className="nav-projects">
                 <span>PROJECTS</span>
                 <ul>
-                    {projects?.map((val) => {
-                        return <li key={val.id}><Link to="/project">{val.name}</Link></li>
+                    {userProjects?.map((val) => {
+                        return <li key={val.id}><Link to={`/project/${val.id}`}>{val.name}</Link></li>
                     })}
                 </ul>
             </div>
@@ -36,5 +29,8 @@ const Nav = ()=>{
     )
 }
 
-export default Nav;
+const CNav = connect(getUserProject)(Nav)
+
+
+export default CNav;
 

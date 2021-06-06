@@ -1,52 +1,92 @@
 
-ul{
+.task-table ul{
     padding: 0;
+    margin: 0;
     list-style: none;
 }
 
-.table-test{
+.task-table{
     margin: 2rem;
-    width: 50%;
-}
-.table-test > table{
-    margin: 2rem;
+    width: auto
+
 }
 
-
-
-.table-test table, td{
-    border: 1px solid black;
-    border-collapse: collapse
+.task-table div.table-header{
+    padding: 0.3rem 0 0.3rem 0;
+    background-color: rgba(26, 38, 61, 0.73);
+    margin: 0.4rem 0 0.5rem 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
 }
 
-.table-test .inner-table{
-    /*background-color: deepskyblue;*/
+.task-table .inner-table{
+
     border-style: hidden;
 }
 
-
-.table-test .taskName{
+.task-table .taskName{
     width: 13rem;
 }
-.table-test .taskId{
-    width: 5rem;
+.table-body .taskName{
+    text-align: left;
+    padding: 0 0 0 0.5rem;
 }
-.table-test .taskDate{
-    width: 7rem;
+.table-body .taskName .deep-children-task{
+    color: #7fd6ff61;
+ }
+.table-body .taskName .deep-children-task:hover{
+    cursor: default;
 }
 
-.table-test .taskContainer{
+.table-body .taskName .children-task-marker{
+    display: inline-block;
+    width: 1.5rem;
+    height: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.table-body .taskName .children-task-marker:hover{
+    cursor: pointer;
+/*    text-shadow: 0 0 2px #1118d9;*/
+    font-weight: 700;
+    color: #cf5400;
+}
+
+.task-table .taskId{
+    width: 5rem;
+}
+.task-table .task-start-date,
+.task-table .task-end-date{
+     width: 7rem;
+ }
+
+.task-table .task-user{
+    max-width: 7rem;
+
+}
+
+.task-table .task-buttons{
+    padding-right: 1rem;
+    width: 9rem;
+}
+.task-table .task-buttons button{
+    font-size: 1rem;
+    border: none;
+}
+
+.task-table .taskContainer{
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
     background-color: #7fd6ff61;
     margin: 0.2rem 0 0.2rem 0;
+    line-height: 2rem;
 }
 
+.task-table li.taskContainer:hover{
+box-shadow: 0 0 3px #4e7182;
 
-
-.table-test td{
-
-    padding: 0;
-    margin: 0;
 }
+

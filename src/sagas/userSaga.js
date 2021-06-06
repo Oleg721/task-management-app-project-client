@@ -4,9 +4,9 @@ import {actionPromise} from "../actions";
 import {gql} from "../utility";
 
 
-export function* watchAsyncAction() {
+export function* watchAsyncUserAction() {
     yield takeLatest(`GET_USERS_ASYNC`, getUsersAsync);
-    yield takeLatest(`USER_PROJECTS` , getUserProjects);
+    // yield takeLatest(`USER_PROJECTS` , getUserProjects);
 }
 
 
@@ -25,6 +25,7 @@ function* getUsersAsync() {
 
 
 
+/*
 function* getUserProjects() {
     console.log(`USER PROJECTS`)
     const promise = gql(`query getProjects{
@@ -37,4 +38,4 @@ function* getUserProjects() {
   }
 }`,{})
     yield put(actionPromise(`userProjects`, promise))
-}
+}*/

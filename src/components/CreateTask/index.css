@@ -1,0 +1,22 @@
+
+.create-task-section > div{
+
+}
+
+.create-task-section .create-task-col-1,
+.create-task-section .create-task-col-2{
+    display: inline-block;
+    padding: 0.3rem;
+}
+
+
+.create-task-section .create-task-col-1{
+    width: 10rem;
+}
+
+
+.create-task-section .create-task-col-2{
+    text-align: left;
+    width: 15rem;
+}
+
