@@ -25,6 +25,8 @@ export const actionAddTask = (task)=>({type: `ADD_TASK`, task : task });
 
 export const actionAddChildrenTask = (task)=>({type : 'ADD_CHILDREN_TASKS', task : task});
 
+export const actionCreateTask = (task, taskUserId, parentTaskId)=>({type: `CREATE_TASK`, task: task, taskUserId : taskUserId, parentTaskId: parentTaskId})
+
 
 
 

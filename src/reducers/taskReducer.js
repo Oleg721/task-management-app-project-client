@@ -9,7 +9,7 @@ export default function taskReducer(state={},{type, task} ){
     let   taskNode =  {[idArr[0]] : state[idArr[0]]} || {};
     const rootTask = taskNode;
 
-    if(type === `GET_TASK` || type === 'ADD_TASK' || type === 'UPDATE_TASK') {
+    if(type === `GET_TASK` || type === 'ADD_TASK' || type === 'UPDATE_TASK' ) {
         console.log(`ADD_TASK_REDUCER_IN`);
         for (let id of idArr){
 

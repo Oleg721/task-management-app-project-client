@@ -9,7 +9,6 @@ export function* watchPromiseAsync() {
 }
 
 
-
 function* promiseAsync({name, promise = delay(2000)}) {
     yield put(actionPending(name));
     try {

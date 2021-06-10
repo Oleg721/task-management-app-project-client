@@ -8,6 +8,9 @@ import {getUserProject} from '../../connect'
 
 const Nav = ({userProjects})=>{
 
+    // let [users, setUsers] = useState(userProjects);
+    //
+    // useEffect(() => setUsers(userProjects), [userProjects]);
    // useState(() => {store.dispatch(actionUserProjects())}, []);
 
     return(
