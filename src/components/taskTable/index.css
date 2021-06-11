@@ -7,7 +7,8 @@
 
 .task-table{
     margin: 2rem;
-    width: auto
+    width: auto;
+    height: inherit;
 
 }
 
@@ -28,6 +29,14 @@
 .task-table .taskName{
     width: 13rem;
 }
+.table-body{
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+}
+
 .table-body .taskName{
     text-align: left;
     padding: 0 0 0 0.5rem;

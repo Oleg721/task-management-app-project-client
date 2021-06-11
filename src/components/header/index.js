@@ -12,7 +12,7 @@ const Header = ({user : {login}})=>{
             <div className="header-welcomePanel">
                 <span>hello {login}</span>
             </div>
-            <button onClick={() => store.dispatch(actionAuthLogout()) }>Logout</button>
+            <button className="button" onClick={() => store.dispatch(actionAuthLogout()) }>Logout</button>
         </header>
     )
 }

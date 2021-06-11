@@ -7,11 +7,18 @@
 }
 
 .wrap {
+
     display: flex;
+    height: 93vh;
+    flex-basis: auto;
 flex-basis: 100%;
 }
 
 .view-section{
-    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 93%;
+    width: 100%;
+    flex-basis: auto;
 }
 

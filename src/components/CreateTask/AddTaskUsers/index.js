@@ -10,8 +10,9 @@ const AddTaskUsers = ({users = [], taskUsers , serUsersCB : setTaskUsers})=>{
     useEffect(() => {
             dispatch(actionGetAllUsers())}, []);
 
+
     return (
-        <div>
+        <div className="task-users-add">
             <select onChange={event => setTaskUsers([...taskUsers, JSON.parse(event.target.value)])}>
                 <option style={{color:"gray"}} key={-1} >select an executor</option>
 
@@ -22,13 +23,23 @@ const AddTaskUsers = ({users = [], taskUsers , serUsersCB : setTaskUsers})=>{
                 })}
             </select>
 
-            <div>
+            <div className="task-users-field">
                 {taskUsers.map(({login, id}) => {
-                    return <span key={id}>{login}</span>
+                    return <span key={id}>{login}
+                                <span
+                                    onClick={event => {
+                                        setTaskUsers(taskUsers.filter((val)=>{ return val.id === id ? false : true  }))}} >
+                                </span>
+                            </span>
                 })}
             </div>
         </div>
     )
+}
+
+
+function SelectedUser() {
+
 }
 
 

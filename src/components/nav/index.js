@@ -15,11 +15,11 @@ const Nav = ({userProjects})=>{
 
     return(
         <nav className="nav">
-            <hr/>
-            <div className="nav-create-task-btn">
-                <Link to="/create-task">Create project</Link>
-            </div>
 
+<section className="button-section">
+        <Link to="/create-task" className="nav-button">Create project</Link>
+</section>
+            <hr/>
             <div className="nav-projects">
                 <span>PROJECTS</span>
                 <ul>

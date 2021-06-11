@@ -1,6 +1,6 @@
 .header{
-background-color: rgba(255, 130, 0, 0.59);
-    flex-basis: 3rem;
+background-color: #318fb5;
+    height: 7vh;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -8,5 +8,15 @@ background-color: rgba(255, 130, 0, 0.59);
 }
 
 .header-welcomePanel{
-    padding: 0 2rem 0 0;
+    height: inherit;
+flex-basis: auto;
+    display: flex;
+    align-items: center;
 }
+
+.header-welcomePanel span{
+    padding: 0 1rem;
+    white-space: nowrap;
+    font-size: 1.3rem;
+    color: white;
+ }

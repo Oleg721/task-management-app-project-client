@@ -55,7 +55,7 @@ function App() {
                       {console.log(login,id)}
                         {(id && login) ?
                             <Main/> :
-                        <Redirect to='login'/>}
+                        <Redirect to='/login'/>}
 
 
                     </Route>

@@ -45,6 +45,9 @@ useEffect(() => {
 return (
     <section className="create-task-section">
 
+<header>
+    <h3>Create task</h3>
+</header>
 
       <div className="create-task-fields">
           <div>
@@ -97,23 +100,18 @@ return (
               </div>
           </div>
           <AddTaskUsers serUsersCB ={(users)=>setUsers(users)} taskUsers={users}/>
-
-
-
-    <button
-    disabled={moment(startDate) > moment(endDate)}
-    onClick={()=>{
-        const task = {name : name,
+      </div>
+        <button className="button"
+                disabled={moment(startDate) > moment(endDate)}
+                onClick={()=>{
+                    const task = {name : name,
                         description: description,
                         startDate: startDate,
                         endDate: endDate}
-        dispatch(actionCreateTask(task, users.map((user)=> user.id), null))
-    } }
-    >Create project</button>
-
-      </div>
-
-<p >{moment(startDate) > moment(endDate) && `project start date cannot be greater than completion`}</p>
+                    dispatch(actionCreateTask(task, users.map((user)=> user.id), null))
+                } }
+        >Create project</button>
+<p className='create-task-message'>{moment(startDate) > moment(endDate) && `project start date cannot be greater than completion`}</p>
 
     </section>)
 }
