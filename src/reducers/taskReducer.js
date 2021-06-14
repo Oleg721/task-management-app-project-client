@@ -1,7 +1,9 @@
 export default function taskReducer(state={},{type, task} ){
 
 
-
+    if(type === 'LOGOUT') {
+        return {}
+    }
 
     if(!task?.path?.match(/^(\/[0-9]+)+$/)) return state;
     const {path, ...taskProps} = task;
@@ -10,7 +12,6 @@ export default function taskReducer(state={},{type, task} ){
     const rootTask = taskNode;
 
     if(type === `GET_TASK` || type === 'ADD_TASK' || type === 'UPDATE_TASK' ) {
-        console.log(`ADD_TASK_REDUCER_IN`);
         for (let id of idArr){
 
             taskNode[id] ?
@@ -19,18 +20,15 @@ export default function taskReducer(state={},{type, task} ){
 
             id !== idArr[idArr.length-1] ?
                 taskNode = taskNode[id].children :
-                taskNode[id]  = {...taskNode[id] , ...taskProps}
+                    taskNode[id]  = {...taskNode[id] , ...task}
         }
+
         return { ...state,  ...rootTask }
     }
 
-    if(type === `GET_TASKS`){
-
-    }
 
 
     if(type === 'DELETE_TASK') {
-        console.log(task)
 
         for (let id of idArr){
             if(!taskNode[id]) return {}

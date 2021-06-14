@@ -2,51 +2,45 @@ import './index.css'
 import React, {useEffect, useRef, useState} from "react";
 import { useParams} from "react-router-dom"
 import moment from "moment";
-import AddTaskUsers from "./AddTaskUsers";
+import AddTaskUsers from "./addTaskUsers";
 import {useDispatch, useSelector}   from 'react-redux';
-import {BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
-import {actionAddChildrenTask, actionAddTask, actionCreateTask} from "../../actions";
-import {connect}   from 'react-redux';
+import {actionAddTask, actionCreateTask} from "../../actions";
+import {actionPending} from "../../actions/actionPromise"
+import {Redirect} from "react-router-dom";
 
-const CreateTask = ()=>{
-    let {id} = useParams();
+const CreateTask = ({headerText = "create Project", id : subTaskId, createdEndCB})=>{
+    let {id} = useParams()
+    if(subTaskId) id = subTaskId;
+
     let [name, setName] = useState(``);
     let [description, setDescription] = useState(``);
     let [startDate, setStartDate] = useState(moment().format(`YYYY-MM-DD`));
     let [endDate, setEndDate] = useState(``);
     let [users, setUsers] = useState([])
-    const taskRef = useRef({id : null})
+    let [redirectedId, setRedirectedId] = useState(null)
     const dispatch = useDispatch();
-
-    console.log(`USE`);
 
 
     let createdTask = useSelector(state =>{
         if( state.promise.createTask?.status !== `RESOLVED`) return null;
             return state.promise.createTask.payload
-
     })
 
+    useEffect(() => {
+        if(createdTask) {
+            dispatch(actionAddTask(createdTask))
+            setRedirectedId(createdTask.id);
+            createdEndCB && createdEndCB();
+            dispatch(actionPending("createTask", null ))
+        }
+    });
 
-
-useEffect(() => {
-    console.log(createdTask)
-    console.log(taskRef)
-    if(createdTask && (createdTask.id !== taskRef.current.id) ) {
-        dispatch(actionAddTask(createdTask))
-        taskRef.current.id = createdTask.id;
-    }
-})
-
-
-
- //   {createdTask && <Redirect to={`/project/${createdTask.id}`}/>}
 
 return (
     <section className="create-task-section">
-
+        {!createdEndCB && redirectedId && <Redirect to={`/project/${redirectedId}`}/>}
 <header>
-    <h3>Create task</h3>
+    <h3>{headerText}</h3>
 </header>
 
       <div className="create-task-fields">
@@ -108,18 +102,13 @@ return (
                         description: description,
                         startDate: startDate,
                         endDate: endDate}
-                    dispatch(actionCreateTask(task, users.map((user)=> user.id), null))
+                    dispatch(actionCreateTask(task, users.map((user)=> user.id), id || null))
                 } }
         >Create project</button>
 <p className='create-task-message'>{moment(startDate) > moment(endDate) && `project start date cannot be greater than completion`}</p>
 
     </section>)
 }
-/*let CCreateTask = connect(initialState => {
-    console.log(initialState.promise);
-    if( initialState.promise.createTask?.status !== `RESOLVED`) return {createdTask: null};
-    return {createdTask: initialState.promise.createTask.payload}
-})(CreateTask);*/
 
 export default CreateTask;
 

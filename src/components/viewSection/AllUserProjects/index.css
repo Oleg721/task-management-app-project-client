@@ -1,0 +1,41 @@
+ul.all-user-projects {
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    overflow-y: auto;
+}
+
+ul.all-user-projects > li {
+    margin: 0.7rem;
+
+}
+
+ul.all-user-projects a {
+    text-decoration: none;
+}
+
+
+ul.all-user-projects .project-table {
+    color: white;
+    background-color: #318fb5;
+}
+
+ul.all-user-projects .project-table td {
+   padding: 0.3rem;
+}
+
+ul.all-user-projects .project-table tbody td:first-child {
+     text-align: left;
+ }
+ul.all-user-projects .project-table tbody td:last-child {
+color: #fbc079;
+}
+
+
+ul.all-user-projects .project-table thead{
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-bottom: 1px solid white;;
+
+}

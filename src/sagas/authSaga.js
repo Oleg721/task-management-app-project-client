@@ -4,15 +4,24 @@ import { put, takeEvery, takeLatest, take , all, call} from 'redux-saga/effects'
 
 
 
-export function* watcherAuthorization(){
+export default function* watcherAuthorization(){
+    yield takeLatest(`REGISTRATION`, registrationSaga)
     yield takeLatest(`LOGIN`, loginSaga);
-    yield takeLatest(`AUTH_LOGIN`, authLoginSaga)
+    yield takeLatest(`AUTH_LOGIN`, authLoginSaga);
 }
 
-function* loginSaga({login, password}){
 
-    //const promise = gql(`query login2{login (login: "pumpkin", password: "qwerty12345")}`,{})
-    console.log(login, password);
+function* registrationSaga({user: {login, name, password}}){
+    const authToken = yield  gql(`mutation regUser($user:UserInput) {
+                                          registration(User: $user)
+                                            }`,JSON.stringify({user: {login : login, name : name, password: password}}));
+    localStorage.authToken = authToken;
+   console.log(authToken);
+    yield put(actionAuthLogin(authToken));
+}
+
+
+function* loginSaga({login, password}){
     const authToken = yield  gql(`query login($login:String, $password: String){
                                         login(login:$login , password : $password)
                                         }`,{login, password});
@@ -21,19 +30,9 @@ function* loginSaga({login, password}){
     yield put(actionAuthLogin(authToken));
 }
 
-export function* authLoginSaga({authToken}) {
+
+function* authLoginSaga({authToken}) {
     yield call(actionAuthLogin, authToken);
-    console.log()
     yield put(actionUserProjects());
 }
 
-export const actionVerifyToken = (authToken) =>{
-
-    const promise = gql(`query verify($authToken: String){
-                                    verifyToken(authToken: $authToken)
-                                     }`,{authToken})
-
-    //const promise = gql(`query login2{login (login: "pumpkin", password: "qwerty12345")}`,{})
-
-    return actionPromise('verifyToken', promise)
-}

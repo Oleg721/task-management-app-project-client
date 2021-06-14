@@ -5,7 +5,7 @@ import {actionGetAllUsers, actionUserProjects} from "../../../actions";
 
 
 const AddTaskUsers = ({users = [], taskUsers , serUsersCB : setTaskUsers})=>{
-    // let [taskUsers, setTaskUsers] = useState([]);
+
     const dispatch = useDispatch();
     useEffect(() => {
             dispatch(actionGetAllUsers())}, []);
@@ -35,11 +35,6 @@ const AddTaskUsers = ({users = [], taskUsers , serUsersCB : setTaskUsers})=>{
             </div>
         </div>
     )
-}
-
-
-function SelectedUser() {
-
 }
 
 

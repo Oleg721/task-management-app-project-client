@@ -19,7 +19,7 @@ section.button-section{
 .nav-projects{
 display: flex;
     flex-direction: column;
-    height: 80%;
+    height: 75%;
 
 }
 
@@ -43,7 +43,7 @@ display: block;
     background: #0195ae;
     margin: 2px;
     padding: 0 0 0 0.5rem;
-    border-radius: 4px;
+
     transition: background-color ease-out 200ms;
 
 }

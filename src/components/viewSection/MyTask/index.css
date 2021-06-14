@@ -1,0 +1,25 @@
+ul.my-tasks {
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+ul.my-tasks li{
+    background: #318fb5;
+    color: #FFFFFF;
+    font-size: 1.2rem;
+      display: flex;
+      justify-content: space-around;
+    margin: 0.2rem;
+  }
+
+ul.my-tasks span{
+    width: 7rem;
+    text-align: left;
+}
+
+ul.my-tasks span.my-task-name{
+    width: 13rem;
+    text-align: left;
+   }

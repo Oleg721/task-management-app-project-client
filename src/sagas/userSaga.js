@@ -6,7 +6,6 @@ import {gql} from "../utility";
 
 export function* watchAsyncUserAction() {
     yield takeLatest(`GET_USERS_ASYNC`, getUsersAsync);
-    // yield takeLatest(`USER_PROJECTS` , getUserProjects);
 }
 
 
@@ -20,22 +19,6 @@ function* getUsersAsync() {
   }
 }`,{})
     yield put(actionPromise(`getAllUsers`, promise))
-    //yield put({type: `PROMISE_ASYNC` , name: `getAllUsers`, promiseFunc : promise})
 }
 
 
-
-/*
-function* getUserProjects() {
-    console.log(`USER PROJECTS`)
-    const promise = gql(`query getProjects{
-  getProjects{
-    id
-    name
-    description
-    startDate
-    endDate
-  }
-}`,{})
-    yield put(actionPromise(`userProjects`, promise))
-}*/

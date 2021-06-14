@@ -9,12 +9,44 @@ export function* watchAsyncTaskAction() {
    yield takeEvery(`GET_USER_PROJECTS` ,getUserProjects);
    yield takeLatest(`ADD_CHILDREN_TASKS`, addChildrenTask);
    yield takeEvery(`CREATE_TASK`, createTask)
-/*    yield takeLatest(`GET_USERS_ASYNC`, getUsersAsync);
-    yield takeLatest(`USER_PROJECTS` , getUserProjects);*/
+    yield takeEvery(`UPDATE_TASK`, updateTask)
+    yield takeEvery(`GET_USER_TASK`, getUserTasks)
 }
 
+
+function* getUserTasks(){
+    const promise = gql(`query getUserTasks {
+                                    getUserTasks{
+                                            id
+                                            name
+                                            state
+                                            description
+                                            startDate
+                                            endDate
+                                            path
+                                      }
+}`);
+    yield put(actionPromise(`usersTask`, promise));
+}
+
+
+function* updateTask({task}){
+    yield gql(`mutation updateTask($task: TaskInput) {
+                                          updateTask(Task : $task) {
+                                            id
+                                            name
+                                            state
+                                            description
+                                            startDate
+                                            endDate
+                                            path
+  }
+}`, JSON.stringify({task:{id: task.id, state: task.state }}));
+}
+
+
 function* createTask({task, taskUserId, parentTaskId }){
-    const promise= yield gql(`mutation ct($task:TaskInput, $usersId:[ID], $parentTaskId:ID){
+    const promise = yield gql(`mutation ct($task:TaskInput, $usersId:[ID], $parentTaskId:ID){
                                         createTask(Task: $task, usersId: $usersId, parentTaskId: $parentTaskId) {
                                             id
                                             name
@@ -23,15 +55,14 @@ function* createTask({task, taskUserId, parentTaskId }){
                                             startDate
                                             endDate
                                             path
+                                            countChildren
                                             }
 }`, JSON.stringify({task : {...task}, usersId: taskUserId, parentTaskId : parentTaskId }));
-
     yield put(actionPromise(`createTask`, promise));
-
 }
 
+
 function* getUserProjects() {
-    console.log(`USER PROJECTS`)
     const tasks = yield gql(`query getProjects{
                                         getUserProjects{
                                             id
@@ -41,6 +72,7 @@ function* getUserProjects() {
                                             startDate
                                             endDate
                                             path
+                                            countChildren
                                           }
 }`,{})
     if(!tasks) return;
@@ -51,8 +83,6 @@ function* getUserProjects() {
 
 
 function* addChildrenTask({task}) {
-    console.log(`CHILDREN TASK`)
-    console.log(JSON.stringify(task))
     const tasks = yield gql(`query taskChildren($task: TaskInput) {
                                           getTaskChildren(Task : $task) {
                                                 id
@@ -62,9 +92,9 @@ function* addChildrenTask({task}) {
                                                 startDate
                                                 endDate
                                                 path
+                                                countChildren
                                               }
 }`, JSON.stringify({task : {...task}}))
-    console.log(tasks)
     for (let task of tasks){
         yield put(actionAddTask(task))
     }

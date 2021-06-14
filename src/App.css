@@ -58,3 +58,19 @@
   color: #005b7c;
 
 }
+
+*::-webkit-scrollbar {
+  width: 10px;
+  background-color: #01556a00;;
+}
+
+*::-webkit-scrollbar-thumb {
+
+  background-color: #318fb5;
+}
+
+*::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+
+  background-color: #f9f9fd;
+}

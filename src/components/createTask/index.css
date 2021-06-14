@@ -96,13 +96,13 @@ padding: 1rem 0;
     width: 0.7rem;
     height: 0.7rem;
     margin-left: 0.4rem;
-    background-image: url("../ico/delete-some.svg");
+    background-image: url("../../ico/delete-some.svg");
     background-repeat: no-repeat;
     background-size: cover;
     cursor: pointer;
 }
 .create-task-section .task-users-field > span > span:hover{
-    background-image: url("../ico/delete-some.svg");
+    background-image: url("../../ico/delete-some.svg");
 }
 
 .create-task-section  > button{

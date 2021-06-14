@@ -1,8 +1,9 @@
 import './SignIn.css'
 import React, {useState} from 'react';
 import {BrowserRouter as Router, Switch, Route, Link, useParams} from "react-router-dom";
-import {actionLogin} from '../../actions'
+import {actionLogin, actionRegistration} from '../../actions'
 import store from "../../store"
+import {useDispatch} from "react-redux";
 
 
 
@@ -42,7 +43,7 @@ const RegisterForm = ({action})=>{
     const [password, setPassword] = useState(``);
     const [verifyPassword, setVerifyPassword] = useState(``);
 
-
+    const dispatch = useDispatch();
 
     return (
         <div className="register-form">
@@ -57,7 +58,7 @@ const RegisterForm = ({action})=>{
             <PasswordInput setText={setVerifyPassword} placeholderText="Repeat password"/>
 
             <button disabled={ !login.length|| (password !== verifyPassword) || !passwordValidator(password)}
-                    onClick={()=>action(login, password)}>
+                    onClick={()=>dispatch(actionRegistration({login: login, name: name, password: password}))}>
                 create
             </button>
             <p className="message">Already registered?

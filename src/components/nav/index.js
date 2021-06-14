@@ -1,23 +1,22 @@
 import './index.css';
-import store from "../../store";
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {connect}   from 'react-redux';
-import {actionUserProjects} from '../../actions'
+import { actionGetUserTask} from '../../actions'
 import {getUserProject} from '../../connect'
+import {useDispatch} from "react-redux";
+
+
 
 const Nav = ({userProjects})=>{
-
-    // let [users, setUsers] = useState(userProjects);
-    //
-    // useEffect(() => setUsers(userProjects), [userProjects]);
-   // useState(() => {store.dispatch(actionUserProjects())}, []);
-
+    const dispatch = useDispatch();
     return(
         <nav className="nav">
 
 <section className="button-section">
+        <Link to="/" className="nav-button">Home</Link>
         <Link to="/create-task" className="nav-button">Create project</Link>
+        <Link onClick={()=>dispatch(actionGetUserTask()) } to="/user-task" className="nav-button">My task</Link>
 </section>
             <hr/>
             <div className="nav-projects">

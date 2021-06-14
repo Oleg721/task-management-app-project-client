@@ -1,5 +1,7 @@
 
 .task-table ul{
+    display: flex;
+    flex-direction: column;
     padding: 0;
     margin: 0;
     list-style: none;
@@ -9,13 +11,15 @@
     margin: 2rem;
     width: auto;
     height: inherit;
+    display: flex;
+    flex-direction: column;
 
 }
 
 .task-table div.table-header{
     padding: 0.3rem 0 0.3rem 0;
     background-color: rgba(26, 38, 61, 0.73);
-    margin: 0.4rem 0 0.5rem 0;
+    margin: 0.4rem 0.2rem 0.5rem 0.2rem;
     font-size: 1.2rem;
     font-weight: 600;
     color: white;
@@ -83,19 +87,89 @@
 .task-table .task-buttons button{
     font-size: 1rem;
     border: none;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    font-weight: 400;
+    background-color: #db7800;
+    color: #ffff;
+    transition: color ease-in 400ms;
+    line-height: 1.2rem;
+    border-radius: 0.6rem;
+    display: none;
+
+
 }
+
+.task-table .task-buttons button:hover{
+    background-color: #fe9900;
+
+
+
+}
+
 
 .task-table .taskContainer{
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
-    background-color: #7fd6ff61;
-    margin: 0.2rem 0 0.2rem 0;
+    background-color: #318fb5;
+    color: white;
+    margin: 0.2rem 0.2rem 0.2rem 0.2rem;
     line-height: 2rem;
+    box-shadow: 1px 2px 3px 1px #00124452;
+    transition: background-color ease-in 200ms;
 }
 
 .task-table li.taskContainer:hover{
-box-shadow: 0 0 3px #4e7182;
+    background-color: #b0cac7;
+}
+.add-task-btn{
+    cursor: pointer
+}
+
+.add-task-btn:hover{
+    background-color: #db7800;
+}
+
+.task-table li.taskContainer:hover button{
+    display: initial;
 
 }
 
+.task-table li.taskContainer .count-children-task{
+    background-color: #db7800 ;
+    margin: 0 0 0 .5rem;
+    padding: 0 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    border-radius: 0.5rem;
+}
+
+
+
+.task-table li.taskContainer .count-children-task:before{
+    content: '';
+    display: inline-block;
+    width: 0.9rem;
+    height: 0.9rem;
+    background-size: cover;
+    vertical-align: middle;
+    margin: 0 0.2rem 0.1rem 0;
+    background-image: url("../../ico/ico.svg");
+}
+
+.task-table select.state-select{
+
+    text-align-last: center;
+    text-align: center;
+    color: white;
+    border-radius: 0.7rem;
+    border: none;
+border: none;}
+
+.task-table select.state-select:focus{
+
+/*    background:#dc3545;
+    background: #0a58ca;
+    background: #198754;*/
+}
